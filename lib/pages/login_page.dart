@@ -13,6 +13,7 @@ class _nameState extends State<name> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Login'),
+        backgroundColor: Colors.amber,
       ),
     );
   }
