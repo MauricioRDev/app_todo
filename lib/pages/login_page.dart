@@ -1,39 +1,85 @@
+import 'dart:math';
+
+import 'package:app_todo/common_widget/custom_text_field.dart';
 import 'package:flutter/material.dart';
 
-class loginPage extends StatefulWidget {
-  const loginPage({super.key});
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
   @override
-  State<loginPage> createState() => _loginPageState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class _loginPageState extends State<loginPage> {
+class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 169, 1, 247),
       body: SingleChildScrollView(
         child: SizedBox(
-          height: 600,
-          width: 500,
+          height: size.height,
+          width: size.width,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Expanded(
                 child: Container(
-                  color: Colors.amber,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.vertical(
+                      bottom: Radius.circular(120),
+                    ),
+                  ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: const [
-                      Text('LovePeople'),
+                      Expanded(
+                        child: Text(
+                          'LovePeople',
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
               ),
+
+              //parte de baixo
               Container(
-                padding: const EdgeInsets.only(
-                  top: 300,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 32,
+                  vertical: 280,
                 ),
                 decoration: const BoxDecoration(
-                  color: Colors.purple,
+                  color: Color.fromARGB(255, 169, 1, 255),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: const [
+                    //LOGIN
+                    CustomTextField(
+                      icon: Icons.person,
+                      label: 'Número de telefone, email ou CPF',
+                    ),
+
+                    CustomTextField(
+                      icon: Icons.lock,
+                      label: 'Senha',
+                      isSecret: true,
+                    ),
+                    Text(
+                      'Esqueceu seu login ou senha?  Clique Aqui',
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Colors.white,
+                      ),
+                    ),
+
+                    
+                  ],
                 ),
               ),
             ],
