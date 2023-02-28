@@ -24,7 +24,11 @@ class _BaseScreenState extends State<BaseScreen> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          // apenas um teste, para validar a funcionalidade do ElevatedButton
+          // ignore: avoid_print
+          print("clicou!!");
+        },
       ),
     );
   }
