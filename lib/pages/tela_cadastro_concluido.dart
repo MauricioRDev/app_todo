@@ -12,35 +12,43 @@ class _CadastroConcluidoState extends State<CadastroConcluido> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: const Color.fromRGBO(169, 1, 247, 1),
-        padding: const EdgeInsets.only(top: 0),
-        alignment: AlignmentDirectional.topEnd,
-        child: Center(
-          child: ElevatedButton(
-            onPressed: () {
-              // apenas um teste, para validar a funcionalidade do ElevatedButton
-              // ignore: avoid_print
-              print("clicou!!");
-            },
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(
-                  const Color.fromARGB(104, 10, 13, 185)),
-              padding: MaterialStateProperty.all(
-                  const EdgeInsets.only(right: 22, left: 22)),
-              shape: MaterialStateProperty.all(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  side: const BorderSide(width: 1, color: Colors.white),
+        height: double.infinity,
+        width: double.infinity,
+        color: Colors.purple,
+        child: Column(
+          children: [
+            Column(
+              children: [
+                Container(
+                  width: 100,
+                  height: 100,
+                  color: Colors.purple,
                 ),
-              ),
+                Container(
+                  width: 100,
+                  height: 100,
+                  color: Colors.purple,
+                ),
+                const Text("Cadastro concluído!"),
+                Align(
+                  alignment: const Alignment(0.00, 0),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      // ignore: avoid_print
+                      print("clicou!!");
+                    },
+                    style: const ButtonStyle(
+                      backgroundColor: MaterialStatePropertyAll(
+                          Color.fromARGB(187, 3, 40, 104)),
+                    ),
+                    child: const Text("Começar"),
+                  ),
+                ),
+              ],
             ),
-            child: const Text("Começar"),
-          ),
+          ],
         ),
       ),
     );
   }
 }
-
-//assets/corujinha.jpg
-//comenta
