@@ -22,11 +22,11 @@ class FormularioTarefaState extends State<FormularioTarefa> {
             Editor(
                 controlador: _controladorCampoNomeTarefa,
                 rotulo: 'Título da Tarefa',
-                dica: 'Título da Tarefa'),
+                dica: 'Título da Tarefa', icone: null, ),
             Editor(
                 controlador: _controladorCampoTarefa,
                 rotulo: 'Tarefa',
-                dica: 'Escreva uma descrição para sua tarefa.'),
+                dica: 'Escreva uma descrição para sua tarefa.', icone: null,),
             ElevatedButton(
                 onPressed: () => _criaTarefa(context), child: Icon(Icons.done))
           ],
@@ -66,17 +66,26 @@ class ListaTarefas extends StatefulWidget {
 }
 
 class _ListaTarefasState extends State<ListaTarefas> {
+  final TextEditingController _controladorCampoPesquisa =
+      TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //TODO: arrumar a caixa de pesquisa
+      drawer: Drawer( child: Column(
+        children: [
+          Editor(controlador: _controladorCampoPesquisa, rotulo: 'Busque por uma palavra-chave', dica: 'dica', icone: Icons.search),
+        ],
+      )),
       appBar: AppBar(title: Text('Suas Listagens')),
       body: ListView.builder(
-        itemCount: widget._tarefas.length,
-        itemBuilder: (context, indice) {
-          final tarefa = widget._tarefas[indice];
-          return ItemTarefa(tarefa);
-        },
-      ),
+            itemCount: widget._tarefas.length,
+            itemBuilder: (context, indice) {
+              final tarefa = widget._tarefas[indice];
+              return ItemTarefa(tarefa);
+            },
+          ),
+          
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
@@ -101,17 +110,19 @@ class _ListaTarefasState extends State<ListaTarefas> {
   }
 }
 
+//Card responsável pela criação da tarefa
 class ItemTarefa extends StatelessWidget {
-  final Tarefa _tarefas;
+  final Tarefa _tarefa;
 
-  ItemTarefa(this._tarefas);
+  ItemTarefa(this._tarefa);
 
   @override
   Widget build(BuildContext context) {
     return Card(
-        child: ListTile(
-      title: Text(_tarefas.nomeTarefa),
-      subtitle: Text(_tarefas.tarefa),
+      child: ListTile(
+        trailing: const Icon(Icons.delete),
+        title: Text(_tarefa.nomeTarefa),
+        subtitle: Text(_tarefa.tarefa),
     ));
   }
 }
@@ -120,8 +131,9 @@ class Editor extends StatelessWidget {
   final TextEditingController controlador;
   final String rotulo;
   final String dica;
+  final IconData? icone;
 
-  Editor({required this.controlador, required this.rotulo, required this.dica});
+  Editor({required this.controlador, required this.rotulo, required this.dica, required this.icone});
 
   @override
   Widget build(BuildContext context) {
@@ -131,8 +143,9 @@ class Editor extends StatelessWidget {
           controller: controlador,
           style: TextStyle(fontSize: 16.0),
           decoration: InputDecoration(
-            labelText: rotulo,
-            hintText: dica,
+            icon: icone != null? Icon(icone) : null,
+              labelText: rotulo,
+              hintText: dica,
           ),
         ));
   }

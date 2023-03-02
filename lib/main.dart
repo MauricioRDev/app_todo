@@ -1,3 +1,4 @@
+import 'package:app_todo/pages/list_page.dart';
 import 'package:app_todo/pages/login_page.dart';
 import 'package:flutter/material.dart';
 
@@ -14,11 +15,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'App TODO',
       theme: ThemeData(
-        primarySwatch: Colors.purple,
-        scaffoldBackgroundColor: Colors.white.withAlpha(190),
+        primaryColorLight: Colors.white,
+        scaffoldBackgroundColor: Colors.purpleAccent[700],
       ),
       debugShowCheckedModeBanner: false,
-      home: const LoginPage(),
+      home: ListaTarefas(),
     );
   }
 }
