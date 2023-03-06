@@ -1,4 +1,6 @@
 import 'package:app_todo/pages/login_page.dart';
+import 'package:app_todo/pages/tela_cadastro_concluido.dart';
+import 'package:app_todo/pages/teste.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -19,6 +21,7 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       home: const LoginPage(),
+
     );
   }
 }
