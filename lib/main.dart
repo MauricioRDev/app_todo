@@ -1,6 +1,4 @@
-import 'package:app_todo/pages/login_page.dart';
 import 'package:app_todo/pages/tela_cadastro_concluido.dart';
-import 'package:app_todo/pages/teste.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -20,7 +18,9 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white.withAlpha(190),
       ),
       debugShowCheckedModeBanner: false,
-      home: const teste(),
+      home: const CadastroConcluido(
+        title: '',
+      ),
     );
   }
 }
