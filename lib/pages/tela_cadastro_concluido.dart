@@ -75,7 +75,6 @@ class _CadastroConcluidoState extends State<CadastroConcluido> {
       ),
     );
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -111,3 +110,4 @@ class _CadastroConcluidoState extends State<CadastroConcluido> {
     ),
   );
 } */
+}
