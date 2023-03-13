@@ -15,61 +15,75 @@ class _ListaTarefasState extends State<ListaTarefas> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Column(
-          children: const [
-            Center(
-              child: Text(
-                'Suas Listagens',
-                style: TextStyle(color: Colors.white, fontSize: 36),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: <Widget>[
+            const Center(
+              child: Padding(
+                padding: EdgeInsets.all(42.0),
+                child: Text(
+                  'Suas listagens',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 35,
+                      fontFamily: 'Montserrat'),
+                ),
               ),
             ),
+            Card(
+              child: TextField(
+                decoration: InputDecoration(
+                  border: const OutlineInputBorder(),
+                  hintText: 'Busque palavras-chave',
+                  hintStyle: TextStyle(color: Colors.deepPurple.shade900),
+                  suffixIcon: const Icon(Icons.search),
+                  suffixIconColor: Colors.deepPurple.shade900,
+                ),
+              ),
+            ),
+            Expanded(
+              child: SizedBox(
+                height: 200,
+                child: ListView.builder(
+                  itemCount: widget._tarefas.length,
+                  itemBuilder: (context, indice) {
+                    final tarefa = widget._tarefas[indice];
+                    return ItemTarefa(tarefa);
+                  },
+                ),
+              ),
+            )
           ],
         ),
       ),
-      body: Column(
-        children: <Widget>[
-          const Card(
-            child: TextField(
-              decoration: InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Busque palavras-chave',
-              suffixIcon: Icon(Icons.search)),
-            ),
+      floatingActionButton: Center(
+        heightFactor: 2,
+        child: FloatingActionButton(
+          elevation: 0,
+          backgroundColor: Colors.purpleAccent[700],
+          child: const Icon(
+            Icons.add,
+            size: 60,
           ),
-          Expanded(
-            child: SizedBox(
-              height: 200,
-              child: ListView.builder(
-                itemCount: widget._tarefas.length,
-                itemBuilder: (context, indice) {
-                  final tarefa = widget._tarefas[indice];
-                  return ItemTarefa(tarefa);
-                },
-              ),
-            ),
-          )
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.add),
-        onPressed: () {
-          final Future<Tarefa?> future =
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return const FormularioTarefa();
-          }));
-          future.then((tarefaRecebida) {
-            Future.delayed(const Duration(seconds: 1), () {
-              debugPrint('chegou no then do future');
-              debugPrint('$tarefaRecebida');
-              if (tarefaRecebida != null) {
-                setState(() {
-                  widget._tarefas.add(tarefaRecebida);
-                });
-              }
+          onPressed: () {
+            final Future<Tarefa?> future =
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return const FormularioTarefa();
+            }));
+            future.then((tarefaRecebida) {
+              Future.delayed(const Duration(seconds: 1), () {
+                debugPrint('chegou no then do future');
+                debugPrint('$tarefaRecebida');
+                if (tarefaRecebida != null) {
+                  setState(() {
+                    widget._tarefas.add(tarefaRecebida);
+                  });
+                }
+              });
             });
-          });
-        },
+          },
+        ),
       ),
     );
   }
@@ -91,21 +105,28 @@ class ItemTarefa extends StatelessWidget {
     return Padding(
         padding: const EdgeInsets.all(10.0),
         child: Card(
+          color: const Color.fromARGB(255, 207, 235, 209),
           child: Padding(
             padding: const EdgeInsets.all(10.0),
             child: Row(
               children: [
                 Expanded(
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('${_tarefa.nomeTarefa}',),
-                    Text('${_tarefa.tarefa}'),
+                    Text(
+                      '${_tarefa.nomeTarefa}',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold, color: Colors.deepPurple.shade900
+                      ),
+                    ),
+                    Text('${_tarefa.tarefa}', style: TextStyle(color: Colors.deepPurple.shade900),),
                   ],
                 )),
                 IconButton(
                     onPressed: () => _delete(context, tarefa),
-                    icon: const Icon(Icons.delete, color: Colors.red))
+                    icon: Icon(Icons.delete, color: Colors.deepPurple.shade900))
               ],
             ),
           ),
@@ -123,14 +144,14 @@ class ItemTarefa extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text('Deseja deletar o todo: ${tarefa.tarefa?.title}?'),
+                  const Text('Deseja deletar o todo?'),
                   Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       ElevatedButton(
-                          onPressed: () {}, child: const Text('Não')),
+                          onPressed: () {}, child: const Text('Cancelar')),
                       ElevatedButton(
-                          onPressed: () {}, child: const Text('Sim')),
+                          onPressed: () {}, child: const Text('Confirmar')),
                     ],
                   )
                 ],
