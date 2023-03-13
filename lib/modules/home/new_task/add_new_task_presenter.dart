@@ -12,9 +12,6 @@ class AddNewTaskPresenter with ChangeNotifier {
 
   AddNewTaskPresenter(this.addNewTaskModel, this.homeRepository);
 
-  // alou() {
-  //   addNewTaskRepository.getToDos();
-  // }
 
   setNewTaskTitle(String value) => addNewTaskModel.newTaskTitle = value;
 

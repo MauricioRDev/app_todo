@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 
 import 'modules/auth/login_page.dart';
+import 'modules/auth/splash_view.dart';
 import 'modules/home/home/home_view.dart';
 import 'modules/home/new_task/add_new_task_view.dart';
 
@@ -23,7 +24,7 @@ class _AppWidgetState extends State<AppWidget> {
       '/home': (context) => const HomeView(),
       '/add_new': (context) => const AddNewTaskView(),
       '/auth_view': (context) => AuthView(),
-       // '/splash_view': (context) => SplashView(),
+      '/splash_view': (context) => SplashView(),
        // '/cadastro_concluido': (context) => CadastroConcluido(),
       },
       title: 'To Do List',
