@@ -52,14 +52,3 @@ class _CadastroConcluidoState extends State<CadastroConcluido> {
     );
   }
 }
-
-/* void telaTodo(context) {
-  Navigator.of(context).push(
-    MaterialPageRoute(
-      builder: (context) => FormularioTarefa(context),
-    ),
-  );
-} */
-
-//assets/corujinha.jpg
-//comenta

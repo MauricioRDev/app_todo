@@ -8,6 +8,7 @@ class CustomTextField extends StatefulWidget {
   final List<TextInputFormatter>? inputFormatters;
   final String? initialValue;
   final bool readOnly;
+  
 
   const CustomTextField({
     Key? key,
@@ -55,13 +56,19 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 )
               : null,
           labelText: widget.label,
+          
+          hintStyle: const TextStyle(
+            color: Color.fromRGBO(49, 1, 185, 1,)
+          ),
+          labelStyle: TextStyle(color: Colors.deepPurple.shade700),
           isDense: true,
           filled: true, // Adicionado para preencher a cor de fundo do TextField
           fillColor: Colors
               .white, // Adicionado para definir a cor de preenchimento do TextField
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(18),
+            borderRadius: BorderRadius.circular(15),
           ),
+          
         ),
       ),
     );
