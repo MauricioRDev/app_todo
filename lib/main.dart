@@ -1,26 +1,29 @@
-import 'package:app_todo/pages/login_page.dart';
-import 'package:app_todo/pages/tela_cadastro_concluido.dart';
-import 'package:app_todo/pages/teste.dart';
+
+import 'package:app_todo/modules/auth/auth_confirm.dart';
+import 'package:app_todo/modules/auth/model/auth_model.dart';
+
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'modules/auth/model/repository/user_repository.dart';
+import 'modules/home/home/home_model.dart';
+import 'modules/home/home/home_view.dart';
+import 'modules/home/home/repository/home_repository.dart';
 
 void main() {
-  runApp(const MyApp());
-}
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => AuthConfirm(AuthModel(), AuthRepository()),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => HomeView(
+          HomeModel(),
+          HomeRepository(),
+        ),
+        ),
+       
+      ],)
+  );
 
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'App TODO',
-      theme: ThemeData(
-        primarySwatch: Colors.purple,
-        scaffoldBackgroundColor: Colors.white.withAlpha(190),
-      ),
-      debugShowCheckedModeBanner: false,
-      home: const teste(),
-    );
-  }
 }

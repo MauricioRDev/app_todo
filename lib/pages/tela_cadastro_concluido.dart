@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CadastroConcluido extends StatefulWidget {
-  const CadastroConcluido({super.key});
+  const CadastroConcluido({Key? key}) : super(key: key);
 
   @override
   State<CadastroConcluido> createState() => _CadastroConcluidoState();
@@ -51,4 +51,6 @@ class _CadastroConcluidoState extends State<CadastroConcluido> {
       ),
     );
   }
+
 }
+
