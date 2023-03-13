@@ -1,3 +1,4 @@
+import 'package:app_todo/pages/nova_tarefa.dart';
 import 'package:app_todo/pages/tela_cadastro_concluido.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white.withAlpha(190),
       ),
       debugShowCheckedModeBanner: false,
-      home: const CadastroConcluido(
+      home: const FormularioTarefa(
         title: '',
       ),
     );
