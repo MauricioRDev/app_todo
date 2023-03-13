@@ -1,7 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:app_todo/modules/home/new_task/model/add_new_task_json.dart';
+
+import 'package:app_todo_lovepeople/modules/home/new_task/model/add_new_task_json.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -34,7 +35,7 @@ class HomeRepository {
   Future<http.Response> delTodos(id) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
 
-    var url = Uri.parse('https://todo-lovepeople.herokuapp.com/todos/$id');
+    var url = Uri.parse('https://lovepeople-todo.onrender.com/api/$id');
     String? token = sharedPreferences.getString('jwt');
     final http.Response response = await http.delete(
       url,

@@ -1,6 +1,7 @@
 
-import 'package:app_todo/modules/auth/model/auth_model.dart';
-import 'package:app_todo/modules/auth/model/repository/user_repository.dart';
+
+import 'package:app_todo_lovepeople/modules/auth/model/auth_model.dart';
+import 'package:app_todo_lovepeople/modules/auth/model/repository/user_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

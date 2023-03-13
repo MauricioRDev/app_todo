@@ -1,7 +1,13 @@
-import 'package:app_todo/modules/home/new_task/add_new_task_presenter.dart';
+
+import 'package:app_todo_lovepeople/modules/home/new_task/add_new_task_presenter.dart';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../../shared/widgets/new_task_form_field_widget.dart';
+import '../../../shared/widgets/text_form_field_widget.dart';
+import '../home/widgets/app_bar_widgets.dart';
+import '../home/widgets/color_box_selection_widget.dart';
 
 class AddNewTaskView extends StatefulWidget {
   const AddNewTaskView({Key? key}) : super(key: key);

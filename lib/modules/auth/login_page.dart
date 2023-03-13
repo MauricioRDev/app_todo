@@ -1,114 +1,152 @@
-import 'package:app_todo/modules/auth/auth_confirm.dart';
+
+import 'package:app_todo_lovepeople/modules/auth/auth_confirm.dart';
+import 'package:app_todo_lovepeople/modules/auth/widget/auth_text_button_widget.dart';
+import 'package:app_todo_lovepeople/modules/auth/widget/auth_text_form_field_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-import 'widget/login_widget.dart';
+import '../../shared/widgets/dynamic_button_widget.dart';
+import '../../shared/widgets/password_text_fild_widget.dart';
 
-class LoginView extends StatefulWidget {
-  const LoginView({super.key});
+class AuthView extends StatefulWidget {
+  const AuthView({Key? key}) : super(key: key);
 
   @override
-  State<LoginView> createState() => _LoginViewState();
+  State<AuthView> createState() => _AuthViewState();
 }
 
-class _LoginViewState extends State<LoginView> {
-
-  
+class _AuthViewState extends State<AuthView> {
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(169, 1, 247, 1),
+      backgroundColor: Color.fromARGB(255, 169, 1, 247),
       body: SafeArea(
         child: SingleChildScrollView(
-          child: Consumer<AuthConfirm>(builder: (context, presenter, child){
-          
-          return Column(
-            children: [
-              Container(
-                  width: double.maxFinite,
-                  height: 300,
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(200),
-                      bottomRight: Radius.circular(200),
-                    ),
-                  ),
-                  child: Column(
-                    children: [
-                      const Padding(padding: EdgeInsets.only(top: 42)),
-                      Image.network(
-                        "https://raw.githubusercontent.com/MauricioRDev/app_todo/main/assets/images/corujag.jpg",
-                        width: 200,
-                        height: 200,
+          child: Consumer<AuthConfirm>(builder: (context, presenter, child) {
+            return Column(
+              children: [
+                Stack(
+                  children: [
+                    Container(
+                      height: size.height * 0.3,
+                      width: size.width * 1,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(180),
+                          bottomRight: Radius.circular(180),
+                        ),
                       ),
-                      const Text(
-                        "Lovepeople",
-                        style: TextStyle(
-                            color: Color.fromRGBO(49, 1, 185, 1),
-                            fontFamily: "Montserrat-Bold",
-                            fontSize: 20,
-                            fontWeight:  FontWeight.bold),
-                      )
-                    ],
-                  )),
-              const SizedBox(
-                height: 60 * 1,
-              ),
-              const Center(
-                child: Text(
-                  "Que bom que você voltou!",
-                  style: TextStyle(
-                      fontSize: 30,
+                    ),
+                    Positioned(
+                      top: size.height * 0.05,
+                      left: size.width * 0.32,
+                      right: size.width * 0.32,
+                      child: Container(
+                        height: size.height * 0.2,
+                        child: Image.asset(
+                          'assets/images/shared/logo.png',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      top: size.height * 0.24,
+                      left: size.width * 0.395,
+                      child: Text(
+                        'Lovepeople',
+                        style: GoogleFonts.montserrat(
+                          textStyle: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: size.height * 0.1,
+                ),
+                Text(
+                  'Que bom que voltou!',
+                  style: GoogleFonts.montserrat(
+                    textStyle: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 24,
                       color: Colors.white,
-                      fontFamily: "Montserrat-SemiBold",
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              const Widigetlogin(),
-              const SizedBox(
-                height: 28,
-              ),
-              const Divider(
-                color: Colors.white,
-              ),
-              const SizedBox(
-                height: 18,
-              ),
-              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                const Padding(padding: EdgeInsets.only(left: 8)),
-                const Text(
-                  "Não possui cadastro?",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontFamily: "Tahoma",
-                    fontSize: 20,
-                  ),
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                GestureDetector(
-                  onTap: () {
-                    
-                  },
-                  child: const Text(
-                    "Clique aqui",
-                    style: TextStyle(
-                      color: Color.fromRGBO(255, 214, 0, 1),
-                      fontFamily: "Tahoma",
-                      fontSize: 20,
                     ),
                   ),
+                ),
+                SizedBox(
+                  height: size.height * 0.03,
+                ),
+                AuthUserTextFormFieldWidget(
+                  onChanged: presenter.setUsername,
+                  hintText: 'Número de telefone, email ou CPF',
+                ),
+                SizedBox(
+                  height: size.height * 0.03,
+                ),
+                PasswordTextFormFieldWidget(
+                  onChanged: presenter.setPassword,
+                  toggleStatus: presenter.toggle,
+                  status: presenter.authModel.obscurePasswordStatus,
+                  hintText: 'Senha',
+                ),
+                AuthTextButtonWidget(
+                  text: 'Esqueceu seu login ou senha? ',
+                  buttonText: 'Clique aqui',
+                  marginRight: size.width * 0.15,
+                ),
+                SizedBox(
+                  height: size.height * 0.08,
+                ),
+                DynamicButtonWidget(
+                  onTap: () async {
+                    await presenter.authRepository.postUserAuth();
+                    if (presenter.authRepository.isAuthValid == true) {
+                      Navigator.pushReplacementNamed(context, '/home');
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            'Algo deu errado, revise as informações.',
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.openSans(
+                              textStyle: TextStyle(
+                                fontSize: 16,
+                              ),
+                            ),
+                          ),
+                          duration: Duration(
+                            seconds: 3,
+                          ),
+                        ),
+                      );
+                    }
+                  },
+                  text: 'Entrar',
+                  buttonColor: Color.fromARGB(255, 50, 1, 185),
+                  width: size.width * 0.3,
+                  radius: 15,
+                ),
+                SizedBox(
+                  height: size.height * 0.07,
+                ),
+                AuthTextButtonWidget(
+                  text: 'Não possui cadastro? ',
+                  buttonText: 'Clique aqui',
+                  marginRight: 0,
                 )
-              ]),
-            ],
-          );
-  }),
+              ],
+            );
+          }),
+        ),
       ),
-    ));
+    );
   }
 }
