@@ -51,4 +51,6 @@ class _CadastroConcluidoState extends State<CadastroConcluido> {
       ),
     );
   }
+
 }
+
